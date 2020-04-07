@@ -1,0 +1,33 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:AudioPlayer.View">
+
+
+
+    <Style x:Key="WindowStyle" TargetType="Window">
+        <Setter Property="Background" Value="#FF343434"/>
+    </Style>
+
+    <SolidColorBrush x:Key="TextBoxBackground" Color="#FFC8C3C3"/>
+
+    <SolidColorBrush x:Key="MainBackround" Color="#FF343434"/>
+
+    <SolidColorBrush x:Key="ComboBox.Static.Background" Color="#FF222222" />
+    <SolidColorBrush x:Key="ComboBox.MouseOver.Background" Color="#FF575757"/>
+    <SolidColorBrush x:Key="ComboBox.Foreground.Color" Color="#FFFF5200"/>
+    <SolidColorBrush x:Key="ComboBox.Static.Border" Color="#FF222222"/>
+    
+    <SolidColorBrush x:Key="Scroll.Thumb" Color="#FF575757"/>
+
+    <SolidColorBrush x:Key="Button.Background" Color="#FF222222"/>
+    <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FF575757"/>
+    <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FF6C6C6C"/>
+    <SolidColorBrush x:Key="Button.Foreground" Color="#FFFF5200"/>
+
+    <SolidColorBrush x:Key="ListboxItem.Background" Color="#FF222222"/>
+    <SolidColorBrush x:Key="ListboxItem.MouseOver.Background" Color="#FF575757"/>
+    <SolidColorBrush x:Key="ListboxItem.Selected.Background" Color="#FF6C6C6C"/>
+    <SolidColorBrush x:Key="ListboxItem.Foreground" Color="#FFFF5200"/>
+
+
+</ResourceDictionary>

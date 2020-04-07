@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="AudioPlayer.View.Rating"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AudioPlayer.View"
+             mc:Ignorable="d" Width="85" Height="16.8" Margin="0" MouseLeave="UserControl_MouseLeave" Loaded="Load">
+    <Grid Margin="0,0,0,0">
+
+        <StackPanel Orientation="Horizontal" Height="14" VerticalAlignment="Center" >
+
+
+            <Viewbox MouseEnter="s1_MouseEnter" MouseLeave="s1_MouseLeave" MouseLeftButtonDown="s1_MouseLeftButtonDown">
+
+                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="s1" Fill="#FFFFFFFF" Stroke="#FFFF6600" StrokeThickness="39" StrokeMiterLimit="4" StrokeLineJoin="Round" Data="m 322.85715 308.07647 -91.11929 -72.0743 -90.25904 73.14872 40.38932 -108.93177 -97.460144 -63.23725 116.081264 4.75076 30.02536 -112.231495 31.35284 111.867905 116.01683 -6.12562 -96.70414 64.3874 z" Stretch="Fill" Margin="194.632,136.012,192.632,122.012" Height="1158.47" Width="1165.809" MouseEnter="s1_MouseEnter" MouseLeftButtonDown="s1_MouseLeftButtonDown" Cursor="Hand"/>
+
+            </Viewbox>
+
+            <Viewbox MouseEnter="s2_MouseEnter" MouseLeave="s2_MouseLeave" MouseLeftButtonDown="s2_MouseLeftButtonDown">
+
+                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="s2" Fill="#FFFFFFFF" Stroke="#FFFF6600" StrokeThickness="39" StrokeMiterLimit="4" StrokeLineJoin="Round" Data="m 322.85715 308.07647 -91.11929 -72.0743 -90.25904 73.14872 40.38932 -108.93177 -97.460144 -63.23725 116.081264 4.75076 30.02536 -112.231495 31.35284 111.867905 116.01683 -6.12562 -96.70414 64.3874 z" Stretch="Fill" Margin="194.632,136.012,192.632,122.012" Height="1158.47" Width="1165.809" MouseEnter="s2_MouseEnter" MouseLeftButtonDown="s2_MouseLeftButtonDown" Cursor="Hand"/>
+
+            </Viewbox>
+
+            <Viewbox MouseEnter="s3_MouseEnter" MouseLeave="s3_MouseLeave" MouseLeftButtonDown="s3_MouseLeftButtonDown">
+
+                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="s3" Fill="#FFFFFFFF" Stroke="#FFFF6600" StrokeThickness="39" StrokeMiterLimit="4" StrokeLineJoin="Round" Data="m 322.85715 308.07647 -91.11929 -72.0743 -90.25904 73.14872 40.38932 -108.93177 -97.460144 -63.23725 116.081264 4.75076 30.02536 -112.231495 31.35284 111.867905 116.01683 -6.12562 -96.70414 64.3874 z" Stretch="Fill" Margin="194.632,136.012,192.632,122.012" Height="1158.47" Width="1165.809" MouseEnter="s3_MouseEnter" MouseLeftButtonDown="s3_MouseLeftButtonDown" Cursor="Hand"/>
+
+            </Viewbox>
+
+            <Viewbox MouseEnter="s4_MouseEnter" MouseLeave="s4_MouseLeave" MouseLeftButtonDown="s4_MouseLeftButtonDown">
+
+                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="s4" Fill="#FFFFFFFF" Stroke="#FFFF6600" StrokeThickness="39" StrokeMiterLimit="4" StrokeLineJoin="Round" Data="m 322.85715 308.07647 -91.11929 -72.0743 -90.25904 73.14872 40.38932 -108.93177 -97.460144 -63.23725 116.081264 4.75076 30.02536 -112.231495 31.35284 111.867905 116.01683 -6.12562 -96.70414 64.3874 z" Stretch="Fill" Margin="194.632,136.012,192.632,122.012" Height="1158.47" Width="1165.809" MouseEnter="s4_MouseEnter" MouseLeftButtonDown="s4_MouseLeftButtonDown" Cursor="Hand"/>
+
+            </Viewbox>
+
+            <Viewbox MouseEnter="s5_MouseEnter" MouseLeave="s5_MouseLeave" MouseLeftButtonDown="s5_MouseLeftButtonDown">
+
+                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="s5" Fill="#FFFFFFFF" Stroke="#FFFF6600" StrokeThickness="39" StrokeMiterLimit="4" StrokeLineJoin="Round" Data="m 322.85715 308.07647 -91.11929 -72.0743 -90.25904 73.14872 40.38932 -108.93177 -97.460144 -63.23725 116.081264 4.75076 30.02536 -112.231495 31.35284 111.867905 116.01683 -6.12562 -96.70414 64.3874 z" Stretch="Fill" Margin="194.632,136.012,192.632,122.012" Height="1158.47" Width="1165.809" MouseEnter="s5_MouseEnter" MouseLeftButtonDown="s5_MouseLeftButtonDown" Cursor="Hand"/>
+
+            </Viewbox>
+
+
+
+        </StackPanel>
+    </Grid>
+</UserControl>
