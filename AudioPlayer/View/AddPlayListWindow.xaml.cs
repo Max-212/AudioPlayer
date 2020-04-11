@@ -19,25 +19,28 @@ namespace AudioPlayer.View
     /// </summary>
     public partial class AddPlayListWindow : Window
     {
-        public static string Show(string labelContent, string titleContent = "PlayList name", string buttonContent = "Add playlist")
+        public static string Show(string labelContent, Window owner)
         {
             var NewWindow = new Window();
+            NewWindow.ResizeMode = ResizeMode.NoResize;
+            NewWindow.Owner = owner;
+            NewWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             NewWindow.Name = "NewWindow";
-            NewWindow.Title = titleContent;
+            NewWindow.Title = "PlayList name";
             NewWindow.Width = 200;
             NewWindow.Height = 100;
             var textVar = "";
             var stackPanel = new StackPanel { Orientation = Orientation.Vertical };
             var label = new Label { Content = labelContent, Name = "NewWindowLabel"};
             var textBox = new TextBox { Text = "", Name = "NewWindowTextBox" };
-            var button = new Button { Content = buttonContent, Name = "NewWindowButton" };
+            var button = new Button { Content = "Add Playlist", Name = "NewWindowButton" };
             button.Click += (s, e) =>
             {
                 textVar = textBox.Text;
                 if(textVar != string.Empty)
                     NewWindow.Close();
             };
-        stackPanel.Children.Add(label);
+            stackPanel.Children.Add(label);
             stackPanel.Children.Add(textBox);
             stackPanel.Children.Add(button);
             NewWindow.Content = stackPanel;

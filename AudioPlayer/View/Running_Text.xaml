@@ -14,7 +14,6 @@
             VerticalAlignment="Center"
             TextAlignment="Center"
             FontWeight="Bold"
-            Text="Nirvana - Smells like teen spirit"
             MouseEnter ="TextBoxMouseEnter" MouseLeave="TexBoxMouseLeave" Loaded="TexBlockLoaded"
             >
         </TextBlock>

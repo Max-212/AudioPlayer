@@ -49,10 +49,15 @@ namespace AudioPlayer.View
         {
             Running_Text s = d as Running_Text;
             s.Text = (string)e.NewValue;
-            s.MainText.Text = s.Text;
+            s.text = s.Text;
+            if (s.text.Length > ((int)s.Width / 7))
+                s.MainText.Text = s.text.Substring(0, ((int)s.Width / 7) - 3) + "...";
+            else s.MainText.Text = s.text;
+
 
         }
 
+       
         private static object CoerceText(DependencyObject d, object value)
         {
             return value;
@@ -76,6 +81,7 @@ namespace AudioPlayer.View
         {
             Running_Text s = d as Running_Text;
             s.MainText.Foreground = s.TextForeground;
+            
 
         }
 

@@ -1,0 +1,23 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:AudioPlayer.View"
+                    xmlns:v="clr-namespace:System;assembly=mscorlib">
+
+    <v:String x:Key="m_Title">Аудиопроигрыватель</v:String>
+    <v:String x:Key="m_Genre">Жанр</v:String>
+    <v:String x:Key="m_Year">Год</v:String>
+    <v:String x:Key="m_Playlist">Плейлист</v:String>
+    <v:String x:Key="m_Audios">Песни</v:String>
+    <v:String x:Key="m_Create">Создать</v:String>
+    <v:String x:Key="m_Delete">Удалить</v:String>
+    <v:String x:Key="m_Search">Поиск на компъютере</v:String>
+    <v:String x:Key="m_Add">Добавить</v:String>
+    <v:String x:Key="m_Save">Сохранить</v:String>
+    <v:String x:Key="m_SelecAudios">Выбранные песни</v:String>
+    <v:String x:Key="m_Play">Пуск</v:String>
+    <v:String x:Key="m_Enter">Введите название</v:String>
+    <v:String x:Key="m_Edit">ред.</v:String>
+    <v:String x:Key="m_Del">уд.</v:String>
+
+
+</ResourceDictionary>

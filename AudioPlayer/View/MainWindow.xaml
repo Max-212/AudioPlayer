@@ -3,14 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:local="clr-namespace:AudioPlayer.View"
         xmlns:viewmodel="clr-namespace:AudioPlayer.ViewModel"
         mc:Ignorable="d"
-        Title="Audioplayer" Height="500" Width="400" ResizeMode="NoResize" Style="{DynamicResource WindowStyle}">
+        Title="{DynamicResource m_Title}" Height="500" Width="400" ResizeMode="CanMinimize" Style="{DynamicResource WindowStyle}">
 
-    <Window.DataContext>
-        <viewmodel:MainViewModel />
-    </Window.DataContext>
+
 
     <Grid x:Name="MainGrid">
         <Grid.RowDefinitions>
@@ -19,14 +18,26 @@
             <RowDefinition Height="0.7*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Grid x:Name="Styles" Grid.Row="0">
+        <Grid x:Name="Menu" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="0.1*"/>
+            </Grid.ColumnDefinitions>
             <ComboBox x:Name="styleBox" HorizontalContentAlignment="Center">
+                <ComboBox.ItemContainerStyle>
+                    <Style TargetType="ComboBoxItem" BasedOn="{StaticResource ComboBoxItemStyle}"/>
+                </ComboBox.ItemContainerStyle>
+            </ComboBox>
+
+            <ComboBox x:Name="LangBox" HorizontalContentAlignment="Center" Grid.Column="1">
                 <ComboBox.ItemContainerStyle>
                     <Style TargetType="ComboBoxItem" BasedOn="{StaticResource ComboBoxItemStyle}"/>
                 </ComboBox.ItemContainerStyle>
             </ComboBox>
         </Grid>
 
+        
+        
         <Grid Grid.Row="1" Style="{StaticResource PlayContent}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.15*"/>
@@ -38,17 +49,20 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.4*"/>
                     <ColumnDefinition/>
-                    <ColumnDefinition Width="0.4*"/>
+                    <ColumnDefinition Width="0.2*"/>
+                    <ColumnDefinition Width="0.2*"/>
                 </Grid.ColumnDefinitions>
                 <local:Rating 
                             Grid.Column="0"
                             HorizontalAlignment="Left"
-                            Selected="{Binding SelectedAudio.Mark, Mode=TwoWay}"
+                            Selected="{Binding SelectedAudio.Mark}"
                          />
                 <local:Running_Text Grid.Column="1" Width="220" 
                                     TextForeground="{DynamicResource ListboxItem.Foreground}"
                                     Text="{Binding SelectedAudio.NameView}"/>
-                <Button Grid.Column="2"  Margin="1" Command="{Binding DeleteAudio}">Delete</Button>
+
+                <Button Grid.Column="2" Click="EditAudio" Content="{DynamicResource m_Edit}"></Button>
+                <Button Grid.Column="3" Command="{Binding DeleteAudio}" Content="{DynamicResource m_Del}"></Button>
             </Grid>
 
             <Grid Grid.Row="1">
@@ -58,14 +72,43 @@
                     <ColumnDefinition Width="0.5*"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Column="0" Text="{Binding SelectedAudio.Genre}"
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.1*"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="{DynamicResource m_Genre}"
+                               Foreground="{DynamicResource ListboxItem.Foreground}"
+                               FontStyle="Oblique"
+                               TextAlignment="Center"/>
+
+                    <TextBlock Grid.Row="1" Text="{Binding SelectedAudio.Genre}"
                            Foreground="{DynamicResource ListboxItem.Foreground}"
                            FontStyle="Oblique"
                            TextAlignment="Center"/>
-                <TextBlock Grid.Column="2" Text="{Binding SelectedAudio.Year}"
+
+                </Grid>
+
+                <Grid Grid.Column="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.1*"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="{DynamicResource m_Year}"
+                               Foreground="{DynamicResource ListboxItem.Foreground}"
+                               FontStyle="Oblique"
+                               TextAlignment="Center"/>
+
+                    <TextBlock Grid.Row="1" Text="{Binding SelectedAudio.Year}"
                            Foreground="{DynamicResource ListboxItem.Foreground}"
                            FontStyle="Oblique"
                            TextAlignment="Center"/>
+
+                </Grid>
+
+                
             </Grid>
 
             <Grid x:Name="PlayMenu" Grid.Row="2">
@@ -78,7 +121,7 @@
                 </Grid.ColumnDefinitions>
                 <Button Grid.Column="0"></Button>
                 <Button Grid.Column="1"></Button>
-                <Button Grid.Column="2">Play</Button>
+                <Button Grid.Column="2" Content="{DynamicResource m_Play}"></Button>
                 <Button Grid.Column="3"></Button>
                 <Button Grid.Column="4"></Button>
             </Grid>
@@ -107,8 +150,11 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <Button Command="{Binding AddPlayList}">Create</Button>
-                    <Button Grid.Column="1" Command="{Binding DeletePlayList}">Delete</Button> 
+                    <Button Command="{Binding AddPlayList}" CommandParameter="{Binding RelativeSource=
+                                                 {RelativeSource
+                                                 Mode=FindAncestor,
+                                                 AncestorType=Window}}" Content="{DynamicResource m_Create}"></Button>
+                    <Button Grid.Column="1" Command="{Binding DeletePlayList}" Content="{DynamicResource m_Delete}"></Button> 
                 </Grid>
                 
 
@@ -129,14 +175,14 @@
             </Grid>
 
             <TextBlock Grid.Row="0" Grid.Column="0" 
-                       Text="Playlists"
+                       Text="{DynamicResource m_Playlist}"
                        TextAlignment="Center" 
                        Foreground="{DynamicResource ListboxItem.Foreground}"
                        FontStyle="Italic"
                        VerticalAlignment="Center"/>
 
             <TextBlock Grid.Row="0" Grid.Column="1" 
-                       Text="Audios"
+                       Text="{DynamicResource m_Audios}"
                        TextAlignment="Center" 
                        Foreground="{DynamicResource ListboxItem.Foreground}"
                        FontStyle="Italic"
@@ -152,19 +198,29 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition Width="0.2*"/>
+                        <ColumnDefinition Width="0.2*"/>
                     </Grid.ColumnDefinitions>
                   
                     <ComboBox x:Name="AudioSort" 
                               HorizontalContentAlignment="Center" 
                               VerticalContentAlignment="Center"
-                              Grid.Column="0">
+                              Grid.Column="0"
+                              ItemsSource="{Binding Sorting}"
+                              SelectedItem="{Binding SortedBy}">
                         <ComboBox.ItemContainerStyle>
                             <Style TargetType="ComboBoxItem" BasedOn="{StaticResource ComboBoxItemStyle}"/>
                         </ComboBox.ItemContainerStyle>
-                        <ComboBoxItem>Content</ComboBoxItem>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction
+                                    Command="{Binding Sort}"
+                                />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
                     </ComboBox>
-                         
-                    <Button Grid.Column="2">+</Button>
+
+                    <Button Grid.Column="1" Command="{Binding ClearPlayList}">C</Button>
+                    <Button Grid.Column="2" Click="AddAudio">+</Button>
                 </Grid>
 
                 <Grid Grid.Row="1">

@@ -263,6 +263,17 @@ namespace AudioPlayer.View
 
         private void Load(object sender, RoutedEventArgs e)
         {
+            
+            if (Selected == 0)
+            {
+                s1.Fill = clear;
+                s2.Fill = clear;
+                s3.Fill = clear;
+                s4.Fill = clear;
+                s5.Fill = clear;
+            }
+            
+            
             if (Selected == 1)
             {
                 s1.Fill = orange;
@@ -316,6 +327,16 @@ namespace AudioPlayer.View
 
         public void LoadDP()
         {
+
+            if (Selected == 0)
+            {
+                s1.Fill = clear;
+                s2.Fill = clear;
+                s3.Fill = clear;
+                s4.Fill = clear;
+                s5.Fill = clear;
+            }
+
             if (Selected == 1)
             {
                 s1.Fill = orange;
