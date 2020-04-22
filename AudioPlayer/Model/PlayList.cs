@@ -14,13 +14,14 @@ namespace AudioPlayer.Model
 
         public string Name { get => name; set { name = value; OnPropertyChanged(); } }
         public ObservableCollection<Audio> Audios { get => audios; set { audios = value; OnPropertyChanged(); } }
-        public readonly int Count;
+        
         
         public PlayList()
         {
-            
-            Count = audios.Count();
+         
         }
+
+        
 
       
     }

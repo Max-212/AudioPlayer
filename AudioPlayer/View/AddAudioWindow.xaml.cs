@@ -23,7 +23,7 @@ namespace AudioPlayer.View
         public AddAudioWindow()
         {
             InitializeComponent();
-            DataContext = MainViewModel.getInstance();
+            DataContext = new AddAudioViewModel();
         }
     }
 }

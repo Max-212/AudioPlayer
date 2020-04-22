@@ -71,7 +71,7 @@ namespace AudioPlayer.View
             AddAudioWindow window = new AddAudioWindow();
             window.Owner = this;
             window.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterOwner;
-            window.Show();
+            window.ShowDialog();
 
         }
 
@@ -80,7 +80,13 @@ namespace AudioPlayer.View
             EditAudioWindow window = new EditAudioWindow();
             window.Owner = this;
             window.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterOwner;
-            window.Show();
+            window.ShowDialog();
+        }
+
+        private void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var listBox = sender as ListBox;
+            listBox.ScrollIntoView(listBox.SelectedItem);
         }
     }
 }

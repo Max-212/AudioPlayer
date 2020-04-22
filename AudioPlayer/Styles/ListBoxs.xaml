@@ -1,0 +1,152 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:AudioPlayer.View">
+
+
+    <!--#region ListBoxAudioItem -->
+
+
+    <ControlTemplate x:Key="ListAudioItems" TargetType="ListBoxItem">
+        <Grid>
+
+            <Border 
+                Name="brd"
+                Margin="0,1,10,0"
+                Background="{DynamicResource ListboxItem.Background}"
+                CornerRadius="2">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="0.3*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <local:Running_Text Grid.Row="0" Grid.ColumnSpan="2"
+                                            Width="180"
+                                            TextForeground="{DynamicResource ListboxItem.Foreground}"
+                                            Text="{Binding NameView}"/>
+
+                    <local:Rating Grid.Row="1" Grid.Column="0" IsEnabled="False" Selected="{Binding Mark}"/>
+
+                    <local:Running_Text Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left"
+                                            Width="80"
+                                            TextForeground="{DynamicResource ListboxItem.Foreground}"
+                                            Text="{Binding Genre}"/>
+
+                </Grid>
+            </Border>
+
+            <Polygon 
+                Name="triangle"
+                Margin="2"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Fill="{Binding ElementName=brd, Path=Background}"
+                Points="0,0 20,15, 0,30"
+                
+                Visibility="Hidden" />
+
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsSelected" Value="true">
+                <Setter TargetName="brd" Property="Background" Value="{DynamicResource ListboxItem.Selected.Background}" />
+                <Setter TargetName="triangle" Property="Visibility" Value="Visible" />
+            </Trigger>
+
+            <Trigger Property="IsMouseOver" Value="true">
+                <Setter TargetName="brd" Property="Background" Value="{DynamicResource ListboxItem.MouseOver.Background}" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <!--#endregion-->
+
+    <!--#region ListBoxPlaylistItem-->
+    <ControlTemplate x:Key="ListPlaylistItems" TargetType="ListBoxItem">
+        <Grid>
+            <Border 
+                Name="brd"
+                Margin="0,1,10,0"
+                Background="{DynamicResource ListboxItem.Background}"
+                CornerRadius="2">
+                <Grid>
+
+                    <local:Running_Text
+                            Width="140"
+                            Text="{Binding Name}"
+                            TextForeground="{DynamicResource ListboxItem.Foreground }"/>
+
+                </Grid>
+            </Border>
+
+            <Polygon 
+                Name="triangle"
+                Margin="2"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Fill="{Binding ElementName=brd, Path=Background}"
+                Points="0,0 20,15, 0,30"
+                Visibility="Hidden" />
+
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsSelected" Value="true">
+                <Setter TargetName="brd" Property="Background" Value="{DynamicResource ListboxItem.Selected.Background}" />
+                <Setter TargetName="triangle" Property="Visibility" Value="Visible" />
+            </Trigger>
+
+            <Trigger Property="IsMouseOver" Value="true">
+                <Setter TargetName="brd" Property="Background" Value="{DynamicResource ListboxItem.MouseOver.Background}" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <!--#endregion-->
+
+    <!--#region ListBoxAudioForAddingItem-->
+    <ControlTemplate x:Key="ListAudioForAddingItems" TargetType="ListBoxItem">
+        <Grid>
+            <Border 
+                Name="brd"
+                Margin="0,1,10,0"
+                Background="{DynamicResource ListboxItem.Background}"
+                CornerRadius="2">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="0.3*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <local:Running_Text Grid.Row="0" Grid.ColumnSpan="2"
+                                            Width="200"
+                                            TextForeground="{DynamicResource ListboxItem.Foreground}"
+                                            Text="{Binding NameView}"/>
+
+                    <local:Rating Grid.Row="1" Grid.Column="0" IsEnabled="False" Selected="{Binding Mark}"/>
+
+                    <local:Running_Text Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left"
+                                            Width="100"
+                                            TextForeground="{DynamicResource ListboxItem.Foreground}"
+                                            Text="{Binding Genre}"/>
+
+                </Grid>
+            </Border>
+
+
+        </Grid>
+        <ControlTemplate.Triggers>
+
+            <Trigger Property="IsMouseOver" Value="true">
+                <Setter TargetName="brd" Property="Background" Value="{DynamicResource ListboxItem.MouseOver.Background}" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <!--#endregion-->
+
+</ResourceDictionary>

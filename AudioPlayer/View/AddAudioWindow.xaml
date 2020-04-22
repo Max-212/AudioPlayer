@@ -37,7 +37,7 @@
                      Background="Transparent"
                      BorderThickness="0"
                      Margin="0,0,0,0"
-                     ItemsSource="{Binding PlayLists[0].Audios}"
+                     ItemsSource="{Binding DefaultPlayList.Audios}"
                      SelectedItem="{Binding AudioForAdd}">
                      
                 <ListBox.ItemContainerStyle>

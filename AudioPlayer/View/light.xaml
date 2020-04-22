@@ -3,7 +3,7 @@
                     xmlns:local="clr-namespace:AudioPlayer.View">
 
     <Style x:Key="WindowStyle" TargetType="Window">
-        <Setter Property="Background" Value="#FFCEFFFB"/>
+        <Setter Property="Background" Value="#FFDAD9D9"/>
     </Style>
 
     <SolidColorBrush x:Key="TextBoxBackground" Color="#FF9EE6ED"/>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -7,7 +8,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Windows.Media;
 
 namespace AudioPlayer.Model
 {
@@ -21,7 +22,7 @@ namespace AudioPlayer.Model
         private string year;
         private string path;
 
-
+        
         public string NameView { get => nameView; set { nameView = value; OnPropertyChanged(); } }
         public string Name { get => name; set { name = value; OnPropertyChanged(); } }
         public string Genre { get => genre; set { genre = value; OnPropertyChanged(); } }
@@ -30,6 +31,7 @@ namespace AudioPlayer.Model
         public string Year { get => year; set { year = value; OnPropertyChanged(); } }
         public string Path { get => path; set { path = value; OnPropertyChanged(); } }
 
+        
 
         public Audio(string author, string name, string genre, string path, string year)
         {
