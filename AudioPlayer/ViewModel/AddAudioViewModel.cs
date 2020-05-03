@@ -1,4 +1,5 @@
-﻿using AudioPlayer.Model;
+﻿using AudioPlayer.DAO;
+using AudioPlayer.Model;
 using Microsoft.VisualStudio.PlatformUI;
 using Microsoft.Win32;
 using System;
@@ -17,13 +18,38 @@ namespace AudioPlayer.ViewModel
     {
         public MainViewModel MainVM;
 
-        public PlayList DefaultPlayList { get => MainVM.PlayLists[0]; }
+
+        
 
         private Audio audioForAdd;
+        private PlayList audios;
+        private string search;
 
+
+        public string Search { get => search; set { search = value; SearchAudios(); } }
+        public PlayList Audios { get => audios; set { audios = value; OnPropertyChanged(); } }
         public ObservableCollection<Audio> SelectedAudios { get; set; } // Audios for Add
         public Audio AudioForAdd { get => audioForAdd; set { audioForAdd = value; OnPropertyChanged(); } }
 
+
+        private void SearchAudios()
+        {
+            Audios = new PlayList("temp");
+            if (Search.Equals(""))
+            {
+                Audios = MainVM.PlayLists[0];
+            }
+            else
+            {
+                foreach (var item in MainVM.PlayLists[0].Audios)
+                {
+                    if (item.Author.ToUpper().StartsWith(Search.ToUpper()))
+                    {
+                        Audios.Audios.Add(item);
+                    }
+                }
+            }
+        }
 
         public ICommand InSelectedAudios
         {
@@ -59,16 +85,21 @@ namespace AudioPlayer.ViewModel
                 {
                     foreach (var item in SelectedAudios)
                     {
-                        if (!MainVM.SelectedPlayList.Audios.Contains(item))
-                        {
-                            MainVM.SelectedPlayList.Audios.Add(item);
-                        }
+                        
                         if (!MainVM.PlayLists[0].Audios.Contains(item))
                         {
                             MainVM.PlayLists[0].Audios.Add(item);
+                            var id = MainVM.Database.InsertAudio(item);
+                            MainVM.PlayLists[0].Audios.Last().Id = id;
+                        }
+                        if (!MainVM.SelectedPlayList.Audios.Contains(item) && MainVM.PlayLists.IndexOf(MainVM.SelectedPlayList) != 0)
+                        {
+                            MainVM.SelectedPlayList.Audios.Add(item);
+                            MainVM.Database.InsertAudioToPlayList(item, MainVM.SelectedPlayList);
                         }
                     }
                     SelectedAudios.Clear();
+                    MainVM.SearchAudios();
                 });
             }
         }
@@ -128,9 +159,14 @@ namespace AudioPlayer.ViewModel
 
         public Audio SearchByPath(string path)
         {
-            foreach(Audio item in DefaultPlayList.Audios)
+            foreach(Audio item in MainVM.PlayLists[0].Audios)
             {
                 if (item.Path.Equals(path)) 
+                    return item;
+            }
+            foreach(Audio item in SelectedAudios)
+            {
+                if (item.Path.Equals(path))
                     return item;
             }
             return null;
@@ -138,8 +174,10 @@ namespace AudioPlayer.ViewModel
 
         public AddAudioViewModel()
         {
+            search = "";
             MainVM = MainViewModel.getInstance();
             SelectedAudios = new ObservableCollection<Audio>();
+            Audios = MainVM.PlayLists[0];
         }
     }
 }

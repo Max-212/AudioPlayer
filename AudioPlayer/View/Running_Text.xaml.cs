@@ -53,8 +53,6 @@ namespace AudioPlayer.View
             if (s.text.Length > ((int)s.Width / 7))
                 s.MainText.Text = s.text.Substring(0, ((int)s.Width / 7) - 3) + "...";
             else s.MainText.Text = s.text;
-
-
         }
 
        
@@ -81,8 +79,6 @@ namespace AudioPlayer.View
         {
             Running_Text s = d as Running_Text;
             s.MainText.Foreground = s.TextForeground;
-            
-
         }
 
         private static object CoerceForeground(DependencyObject d, object value)

@@ -3,29 +3,29 @@
                     xmlns:local="clr-namespace:AudioPlayer.View">
 
     <Style x:Key="WindowStyle" TargetType="Window">
-        <Setter Property="Background" Value="#FFDAD9D9"/>
+        <Setter Property="Background" Value="#FFe0e0e0"/>
     </Style>
 
-    <SolidColorBrush x:Key="TextBoxBackground" Color="#FF9EE6ED"/>
-    
-    <SolidColorBrush x:Key="MainBackround" Color="#FFCEFFFB"/>
-    
-    <SolidColorBrush x:Key="ComboBox.Static.Background" Color="#FF3bc588" />
-    <SolidColorBrush x:Key="ComboBox.MouseOver.Background" Color="#FF2CB679"/>
-    <SolidColorBrush x:Key="ComboBox.Foreground.Color" Color="Black"/>
-    <SolidColorBrush x:Key="ComboBox.Static.Border" Color="#FF3bc588"/>
+    <SolidColorBrush x:Key="TextBoxBackground" Color="#FFffffff"/>
 
-    <SolidColorBrush x:Key="Scroll.Thumb" Color="#FF84b88d"/>
+    <SolidColorBrush x:Key="MainBackround" Color="#FFe0e0e0"/>
 
-    <SolidColorBrush x:Key="Button.Background" Color="#FF3bc588"/>
-    <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FF2CB679"/>
-    <SolidColorBrush x:Key="Button.Pressed.Background" Color="#21a86d"/>
-    <SolidColorBrush x:Key="Button.Foreground" Color="Black"/>
+    <SolidColorBrush x:Key="ComboBox.Static.Background" Color="#FFffffff" />
+    <SolidColorBrush x:Key="ComboBox.MouseOver.Background" Color="#FFd7d9d7"/>
+    <SolidColorBrush x:Key="ComboBox.Foreground.Color" Color="#FF000000"/>
+    <SolidColorBrush x:Key="ComboBox.Static.Border" Color="#FFffffff"/>
 
-    <SolidColorBrush x:Key="ListboxItem.Background" Color="#FF3bc588"/>
-    <SolidColorBrush x:Key="ListboxItem.MouseOver.Background" Color="#FF2CB679"/>
-    <SolidColorBrush x:Key="ListboxItem.Selected.Background" Color="#FF21a86d"/>
-    <SolidColorBrush x:Key="ListboxItem.Foreground" Color="Black"/>
+    <SolidColorBrush x:Key="Scroll.Thumb" Color="#FFababab"/>
+
+    <SolidColorBrush x:Key="Button.Background" Color="#FFffffff"/>
+    <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFd7d9d7"/>
+    <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFababab"/>
+    <SolidColorBrush x:Key="Button.Foreground" Color="#FF000000"/>
+
+    <SolidColorBrush x:Key="ListboxItem.Background" Color="#FFffffff"/>
+    <SolidColorBrush x:Key="ListboxItem.MouseOver.Background" Color="#FFd7d9d7"/>
+    <SolidColorBrush x:Key="ListboxItem.Selected.Background" Color="#FFababab"/>
+    <SolidColorBrush x:Key="ListboxItem.Foreground" Color="#FF000000"/>
 
 </ResourceDictionary>
 

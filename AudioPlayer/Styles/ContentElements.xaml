@@ -111,12 +111,60 @@
         <Setter Property="FontStyle" Value="Oblique"/>
     </Style>
 
-    <Style TargetType="TextBox">
+    <!--<Style TargetType="TextBox">
         <Setter Property="Background" Value="{DynamicResource TextBoxBackground}"/>
         <Setter Property="Foreground" Value="{DynamicResource ListboxItem.Foreground}"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="FontStyle" Value="Oblique"/>
+    </Style>-->
+
+    <Style TargetType="TextBox">
+        <Setter Property="FontStyle" Value="Oblique" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Background" Value="{DynamicResource TextBoxBackground}" />
+        <Setter Property="Foreground" Value="{DynamicResource ListboxItem.Foreground}" />
+        <Setter Property="CaretBrush" Value="{DynamicResource ListboxItem.Foreground}" />
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border
+                        Background="{TemplateBinding Background}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+
+                        <Grid Margin="0">
+
+                            <ScrollViewer x:Name="PART_ContentHost" Margin="0" />
+
+                            <TextBlock
+                                x:Name="hint"
+                                VerticalAlignment="Center"
+                                Background="Transparent"
+                                Foreground="Gray"
+                                IsHitTestVisible="False"
+                                Text="{TemplateBinding Tag}"
+                                TextAlignment="{TemplateBinding TextAlignment}"
+                                Visibility="Collapsed" />
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Text" Value="" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="hint" Property="Visibility" Value="Visible" />
+                        </MultiTrigger>
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
+
 
     <!--#region ScrollViewer-->
 
@@ -327,7 +375,7 @@
     <!--#region PlayContent -->
     <Style x:Key="PlayContent" TargetType="Grid">
         <Style.Triggers>
-            <DataTrigger Binding="{Binding SelectedAudio}" Value="{x:Null}">
+            <DataTrigger Binding="{Binding CurrentTrack}" Value="{x:Null}">
                 <Setter Property="Visibility" Value="Hidden"/>
             </DataTrigger>
         </Style.Triggers>

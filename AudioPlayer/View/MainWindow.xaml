@@ -8,29 +8,17 @@
         xmlns:local="clr-namespace:AudioPlayer.View"
         xmlns:viewmodel="clr-namespace:AudioPlayer.ViewModel"
         mc:Ignorable="d"
-        Title="{DynamicResource m_Title}" Height="500" Width="400" ResizeMode="CanMinimize" Style="{DynamicResource WindowStyle}" Icon="PlayLight.png">
-
-
+        Title="AudioPlayer" Height="550" Width="400" ResizeMode="CanMinimize" Style="{DynamicResource WindowStyle}" Icon="PlayLight.png">
 
     <Grid x:Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.09*"></RowDefinition>
             <RowDefinition></RowDefinition>
-            <RowDefinition Height="0.7*"></RowDefinition>
+            <RowDefinition Height="0.9*"></RowDefinition>
         </Grid.RowDefinitions>
 
         <Grid x:Name="Menu" Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="0.1*"/>
-            </Grid.ColumnDefinitions>
             <ComboBox x:Name="styleBox" HorizontalContentAlignment="Center">
-                <ComboBox.ItemContainerStyle>
-                    <Style TargetType="ComboBoxItem" BasedOn="{StaticResource ComboBoxItemStyle}"/>
-                </ComboBox.ItemContainerStyle>
-            </ComboBox>
-
-            <ComboBox x:Name="LangBox" HorizontalContentAlignment="Center" Grid.Column="1">
                 <ComboBox.ItemContainerStyle>
                     <Style TargetType="ComboBoxItem" BasedOn="{StaticResource ComboBoxItemStyle}"/>
                 </ComboBox.ItemContainerStyle>
@@ -56,16 +44,16 @@
                 <local:Rating 
                             Grid.Column="0"
                             HorizontalAlignment="Left"
-                            Selected="{Binding SelectedAudio.Mark}"
+                            Selected="{Binding CurrentTrack.Mark}"
                          />
                 <local:Running_Text Grid.Column="1" Width="220" 
                                     TextForeground="{DynamicResource ListboxItem.Foreground}"
-                                    Text="{Binding SelectedAudio.NameView}"/>
+                                    Text="{Binding CurrentTrack.NameView}"/>
 
-                <Button Grid.Column="2" Click="EditAudio">
+                <Button Grid.Column="2" Click="EditAudio" Margin="0,3,0,0">
                     <materialDesign:PackIcon Kind="Edit"></materialDesign:PackIcon>
                 </Button>
-                <Button Grid.Column="3" Command="{Binding DeleteAudio}">
+                <Button Grid.Column="3" Command="{Binding DeleteAudio}" Margin="0,3,0,0">
                     <materialDesign:PackIcon Kind="Delete"></materialDesign:PackIcon>
                 </Button>
             </Grid>
@@ -81,18 +69,21 @@
                     <RowDefinition Height="0.2*"/>
                 </Grid.RowDefinitions>
 
+                <materialDesign:PackIcon Grid.Column="1" Kind="Headphones" Width="150" Height="150" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+
                 <Grid Grid.Column="0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="0.1*"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="0" Text="{DynamicResource m_Genre}"
+                    <TextBlock Grid.Row="0" Text="Genre"
                                Foreground="{DynamicResource ListboxItem.Foreground}"
                                FontStyle="Oblique"
                                TextAlignment="Center"/>
 
-                    <TextBlock Grid.Row="1" Text="{Binding SelectedAudio.Genre}"
+                    <TextBlock Grid.Row="1" Text="{Binding CurrentTrack.Genre}"
                            Foreground="{DynamicResource ListboxItem.Foreground}"
                            FontStyle="Oblique"
                            TextAlignment="Center"/>
@@ -106,12 +97,12 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="0" Text="{DynamicResource m_Year}"
+                    <TextBlock Grid.Row="0" Text="Year"
                                Foreground="{DynamicResource ListboxItem.Foreground}"
                                FontStyle="Oblique"
                                TextAlignment="Center"/>
 
-                    <TextBlock Grid.Row="1" Text="{Binding SelectedAudio.Year}"
+                    <TextBlock Grid.Row="1" Text="{Binding CurrentTrack.Year}"
                            Foreground="{DynamicResource ListboxItem.Foreground}"
                            FontStyle="Oblique"
                            TextAlignment="Center"/>
@@ -122,7 +113,9 @@
                                 HorizontalAlignment="Right"
                                 Margin="0,10,10,3"
                                 Maximum="100"
-                                Value="{Binding Volume, Mode=TwoWay}"/>
+                                Foreground="{DynamicResource Button.Foreground}"
+                                Value="{Binding Volume, Mode=TwoWay}" IsMoveToPointEnabled="True"/>
+                            
                         <materialDesign:PackIcon Kind="Audio" HorizontalAlignment="Right" Height="22" Width="22" Margin="0,0,10,0"></materialDesign:PackIcon>
                         
                     </StackPanel>
@@ -134,10 +127,14 @@
                     <Slider Orientation="Horizontal"
                                 Maximum="{Binding TotalDuration, Mode=TwoWay}"
                                 SmallChange="10"
-                                Width="285"
+                                Width="290"
                                 HorizontalAlignment="Center"
-                                Margin="0,10,10,3"
-                                Value="{Binding SliderValue, Mode=TwoWay}" AutoToolTipPlacement="TopLeft"/>
+                                Margin="0,10,0,3"
+                                Foreground="{DynamicResource Button.Foreground}"
+                                Value="{Binding SliderValue, Mode=TwoWay}" 
+                                AutoToolTipPlacement="TopLeft"
+                                IsMoveToPointEnabled="True"
+                                />
                     <Label Width="50" Content="{Binding DurationText}"></Label>
                     
                 </StackPanel>
@@ -164,7 +161,7 @@
                 <Button Grid.Column="3" Command="{Binding Next}">
                     <materialDesign:PackIcon Kind="SkipNext" Height="30" Width="30"></materialDesign:PackIcon>
                 </Button>
-                <Button Grid.Column="4">
+                <Button Grid.Column="4" Command="{Binding Random}">
                     <materialDesign:PackIcon Kind="ShuffleVariant" Height="30" Width="30"></materialDesign:PackIcon>
                 </Button>
             </Grid>
@@ -176,13 +173,13 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.15*"/>
+                <RowDefinition Height="0.1*"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
             <Grid x:Name="PlayListMenu" Grid.Column="0" Grid.Row="1">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="0.2*"></RowDefinition>
+                    <RowDefinition Height="0.15*"></RowDefinition>
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
 
@@ -195,8 +192,8 @@
                     <Button Command="{Binding AddPlayList}" CommandParameter="{Binding RelativeSource=
                                                  {RelativeSource
                                                  Mode=FindAncestor,
-                                                 AncestorType=Window}}" Content="{DynamicResource m_Create}"></Button>
-                    <Button Grid.Column="1" Command="{Binding DeletePlayList}" Content="{DynamicResource m_Delete}"></Button> 
+                                                 AncestorType=Window}}" Content="Create"/>
+                    <Button Grid.Column="1" Command="{Binding DeletePlayList}" Content="Delete"/>
                 </Grid>
                 
 
@@ -218,14 +215,14 @@
             </Grid>
 
             <TextBlock Grid.Row="0" Grid.Column="0" 
-                       Text="{DynamicResource m_Playlist}"
+                       Text="PlayLists"
                        TextAlignment="Center" 
                        Foreground="{DynamicResource ListboxItem.Foreground}"
                        FontStyle="Italic"
                        VerticalAlignment="Center"/>
 
             <TextBlock Grid.Row="0" Grid.Column="1" 
-                       Text="{DynamicResource m_Audios}"
+                       Text="Audios"
                        TextAlignment="Center" 
                        Foreground="{DynamicResource ListboxItem.Foreground}"
                        FontStyle="Italic"
@@ -233,8 +230,9 @@
 
             <Grid x:Name="AudioList" Grid.Column="1" Grid.Row="1" Margin="5,0,0,0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="0.2*"></RowDefinition>
+                    <RowDefinition Height="0.18*"></RowDefinition>
                     <RowDefinition></RowDefinition>
+                    <RowDefinition Height="0.25*"/>
                 </Grid.RowDefinitions>
 
                 <Grid x:Name="AudioListMenu">
@@ -277,7 +275,7 @@
                              Background="Transparent"
                              BorderThickness="0"
                              Margin="0,10,0,0"
-                             ItemsSource="{Binding SelectedPlayList.Audios}"
+                             ItemsSource="{Binding CurrentAudios.Audios}"
                              SelectedItem="{Binding SelectedAudio}" 
                              SelectionChanged="OnSelectionChanged"
                              >
@@ -289,8 +287,23 @@
                         </ListBox.ItemContainerStyle>
                     </ListBox>
                     
-
                 </Grid>
+
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="0.17*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox Grid.Column="0" Margin="0,5,0,5"
+                             Text="{Binding Search, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                             Tag="Search by Author..."/>
+                    <materialDesign:PackIcon Margin="0,5,0,5" Width="30" Height="30" Kind="Search" Grid.Column="1" 
+                                             Foreground="{DynamicResource Button.Foreground}"/>
+                </Grid>
+                
+               
+
             </Grid>
         
         </Grid>
