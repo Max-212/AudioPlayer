@@ -52,12 +52,12 @@ namespace AudioPlayer.ViewModel
             Sorting.Add("Mark");
             SortedBy = Sorting[0];
 
-            search = "";
-            SelectedPlayList = PlayLists[0];
-
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(500);
             timer.Tick += Timer_Tick;
+
+            search = "";
+            SelectedPlayList = PlayLists[0];
 
             SliderValue = 0;
             
@@ -77,7 +77,7 @@ namespace AudioPlayer.ViewModel
         private Audio currentTrack;
 
         public ObservableCollection<PlayList> PlayLists { get; set; }
-        public PlayList SelectedPlayList { get => selectedPlayList; set { selectedPlayList = value; CurrentAudios = value; SearchAudios(); OnPropertyChanged(); } }
+        public PlayList SelectedPlayList { get => selectedPlayList; set { CurrentTrack = null; selectedPlayList = value; CurrentAudios = value; SearchAudios(); OnPropertyChanged(); } }
         public Audio SelectedAudio { get => selectedAudio; set { selectedAudio = value; OnPropertyChanged(); SetCurrentTrack(); } }
         public PlayList CurrentAudios { get => currentAudios; set { currentAudios = value; OnPropertyChanged(); } }
         public Audio CurrentTrack { get => currentTrack; set { currentTrack = value; Refresh(); OnPropertyChanged(); } }
@@ -129,7 +129,7 @@ namespace AudioPlayer.ViewModel
                         SelectedPlayList = null;
                         SelectedAudio = null;
                         CurrentTrack = null;
-                        CurrentAudios.Audios.Clear();
+                        
                     } 
                     SelectedPlayList = PlayLists[0];
                 });
@@ -142,7 +142,7 @@ namespace AudioPlayer.ViewModel
             {
                 return new DelegateCommand(() =>
                 {
-                    Audio deletedAudio = SelectedAudio;
+                    Audio deletedAudio = CurrentTrack;
                     CurrentAudios.Audios.Remove(deletedAudio);
                     if (PlayLists.IndexOf(SelectedPlayList) == 0)
                     {
@@ -216,6 +216,8 @@ namespace AudioPlayer.ViewModel
                 return new DelegateCommand(() =>
                 {
 
+                    if (CurrentAudios == null) return;
+
                     if (SortedBy.Equals(Sorting[0]))
                     {
                         CurrentAudios.Audios = new ObservableCollection<Audio>(CurrentAudios.Audios.OrderBy(a => a.Author));
@@ -248,7 +250,7 @@ namespace AudioPlayer.ViewModel
             {
                 CurrentAudios = SelectedPlayList;
             }
-            else
+            else if (SelectedPlayList != null)
             {
                 foreach (var item in SelectedPlayList.Audios)
                 {

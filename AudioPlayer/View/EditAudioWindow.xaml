@@ -23,10 +23,10 @@
         <Label Grid.Row="2" Grid.Column="0" VerticalAlignment="Center">Genre</Label>
         <Label Grid.Row="3" Grid.Column="0" VerticalAlignment="Center">Year</Label>
 
-        <TextBox Grid.Row="0" Grid.Column="1"  Margin="10" TextAlignment="Center" Text="{Binding SelectedAudio.Name}"></TextBox>
-        <TextBox Grid.Row="1" Grid.Column="1"  Margin="10" TextAlignment="Center" Text="{Binding SelectedAudio.Author}"></TextBox>
-        <TextBox Grid.Row="2" Grid.Column="1"  Margin="10" TextAlignment="Center" Text="{Binding SelectedAudio.Genre}"></TextBox>
-        <TextBox Grid.Row="3" Grid.Column="1"  Margin="10" TextAlignment="Center" Text="{Binding SelectedAudio.Year}"></TextBox>
+        <TextBox Grid.Row="0" Grid.Column="1"  Margin="10" TextAlignment="Center" Text="{Binding CurrentTrack.Name}"></TextBox>
+        <TextBox Grid.Row="1" Grid.Column="1"  Margin="10" TextAlignment="Center" Text="{Binding CurrentTrack.Author}"></TextBox>
+        <TextBox Grid.Row="2" Grid.Column="1"  Margin="10" TextAlignment="Center" Text="{Binding CurrentTrack.Genre}"></TextBox>
+        <TextBox Grid.Row="3" Grid.Column="1"  Margin="10" TextAlignment="Center" Text="{Binding CurrentTrack.Year}"></TextBox>
 
         <Button Grid.Row="4" Grid.ColumnSpan="2" Margin="10" Command="{Binding EditAudio}">Save</Button>
         
