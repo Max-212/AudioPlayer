@@ -16,11 +16,7 @@ namespace AudioPlayer.ViewModel
 {
     class AddAudioViewModel : BaseModel
     {
-        public MainViewModel MainVM;
-
-
-        
-
+        private MainViewModel MainVM;
         private Audio audioForAdd;
         private PlayList audios;
         private string search;
@@ -111,7 +107,7 @@ namespace AudioPlayer.ViewModel
                 return new DelegateCommand(() =>
                 {
                     var opd = new OpenFileDialog();
-                    opd.Filter = "MP3 files (*.mp3)|*.mp3|All files (*.*)|*.*";
+                    opd.Filter = "MP3 files (*.mp3)|*.mp3";
                     opd.Multiselect = true;
 
                     if (opd.ShowDialog() == true)

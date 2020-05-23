@@ -44,10 +44,10 @@
 
     <Style x:Key="Play_Pause" TargetType="Button" BasedOn="{StaticResource DefaultButton}">
         <Style.Triggers>
-            <DataTrigger Binding="{Binding IsPause}" Value="True">
+            <DataTrigger Binding="{Binding AudioPlayer.IsPause}" Value="True">
                 <Setter Property="Content" Value="{materialDesign:PackIcon Kind=Play, Size=30}"/>
             </DataTrigger>
-            <DataTrigger Binding="{Binding IsPause}" Value="False">
+            <DataTrigger Binding="{Binding AudioPlayer.IsPause}" Value="False">
                 <Setter Property="Content" Value="{materialDesign:PackIcon Kind=Pause, Size=30}"/>
             </DataTrigger>
         </Style.Triggers>    

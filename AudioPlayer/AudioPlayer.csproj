@@ -226,6 +226,7 @@
     <Compile Include="DAO\DatabaseCommands.cs" />
     <Compile Include="DAO\DatabaseConnection.cs" />
     <Compile Include="Model\BaseModel.cs" />
+    <Compile Include="Model\AudioPlayer.cs" />
     <Compile Include="Model\PlayList.cs" />
     <Compile Include="ViewModel\AddAudioViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />

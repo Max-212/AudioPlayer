@@ -38,7 +38,7 @@ namespace AudioPlayer.ViewModel
             return instance;
         }
 
-        public MainViewModel()
+        private MainViewModel()
         {
             
             Database = new DatabaseCommands();
@@ -54,47 +54,43 @@ namespace AudioPlayer.ViewModel
 
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(500);
-            timer.Tick += Timer_Tick;
-
             search = "";
             SelectedPlayList = PlayLists[0];
-
-            SliderValue = 0;
-            
         }
 
-        DispatcherTimer timer;
-        private MediaPlayer mediaPlayer = new MediaPlayer();
+        DispatcherTimer timer;     
         private bool isRepeat = false;
-        private bool isPause = false;
+        private AudioPlayer.Model.AudioPlayer audioPlayer;
         private string search;
-        private string currentTimeText;
-        private string durationText;
-        private double totalDuration;
         private Audio selectedAudio;
         private PlayList selectedPlayList;
         private PlayList currentAudios;
         private Audio currentTrack;
 
+   
+        public AudioPlayer.Model.AudioPlayer AudioPlayer { get => audioPlayer; set { audioPlayer = value; OnPropertyChanged(); } }
         public ObservableCollection<PlayList> PlayLists { get; set; }
-        public PlayList SelectedPlayList { get => selectedPlayList; set { CurrentTrack = null; selectedPlayList = value; CurrentAudios = value; SearchAudios(); OnPropertyChanged(); } }
         public Audio SelectedAudio { get => selectedAudio; set { selectedAudio = value; OnPropertyChanged(); SetCurrentTrack(); } }
         public PlayList CurrentAudios { get => currentAudios; set { currentAudios = value; OnPropertyChanged(); } }
         public Audio CurrentTrack { get => currentTrack; set { currentTrack = value; Refresh(); OnPropertyChanged(); } }
-
-        public double Volume { get => mediaPlayer.Volume * 100; set { mediaPlayer.Volume = value / 100; OnPropertyChanged(); } } 
-        public double TotalDuration { get => totalDuration; set { totalDuration = value; OnPropertyChanged(); } }
-        public double SliderValue { get => mediaPlayer.Position.TotalSeconds; set { mediaPlayer.Position = TimeSpan.FromSeconds(value); ; OnPropertyChanged(); } }
-        public string CurrentTimeText { get => currentTimeText; set { currentTimeText = value; OnPropertyChanged(); } }
-        public string DurationText { get => durationText; set { durationText = value; OnPropertyChanged(); } }
+        public PlayList SelectedPlayList 
+        { 
+            get => selectedPlayList;
+            set 
+            { 
+                CurrentTrack = null;
+                selectedPlayList = value;
+                CurrentAudios = value;
+                SearchAudios();
+                OnPropertyChanged();
+            }
+        }
         public string Search { get => search; set { search = value; SearchAudios(); } }
-
-        public bool IsPause { get => isPause; set { isPause = value; OnPropertyChanged(); } }
         public bool IsRepeat { get => isRepeat; set { isRepeat = value; OnPropertyChanged(); } }
-
         public List<string> Sorting { get; set; }
         public string SortedBy { get; set; }
         
+
         public IDAO Database { get; }
 
         public ICommand AddPlayList
@@ -265,16 +261,19 @@ namespace AudioPlayer.ViewModel
 
         private void Refresh()
         {           
-            IsPause = false;
             if (timer.IsEnabled) timer.Stop();
-            mediaPlayer.Stop();
             if (CurrentTrack != null)
             {
+                if(AudioPlayer != null)
+                {
+                    AudioPlayer.Stop();
+                }
+                AudioPlayer = new AudioPlayer.Model.AudioPlayer(CurrentTrack);//
+                timer.Tick += AudioPlayer.Timer_Tick;
                 if (System.IO.File.Exists(CurrentTrack.Path))
                 {
-                    mediaPlayer.Open(new Uri(CurrentTrack.Path));
-                    mediaPlayer.Play();
-                    mediaPlayer.MediaEnded += MediaEnded;
+                    AudioPlayer.Play();
+                    AudioPlayer.mediaPlayer.MediaEnded += MediaEnded;
                     timer.Start();
                 }
                 else
@@ -302,17 +301,14 @@ namespace AudioPlayer.ViewModel
             {
                 return new DelegateCommand(() =>
                 {
-                    if(isPause)
+                    if(AudioPlayer.IsPause)
                     {
-                        mediaPlayer.Play();
+                        AudioPlayer.Play();
                     }
                     else
                     {
-                        mediaPlayer.Pause();
+                        AudioPlayer.Pause();
                     }
-                    IsPause = !IsPause;
-
-
                 });
             }
         }
@@ -323,7 +319,7 @@ namespace AudioPlayer.ViewModel
             {
                 return new DelegateCommand(() =>
                 {
-                    IsRepeat = !IsRepeat;
+                   IsRepeat = !IsRepeat;
                 });
                 
             }
@@ -404,7 +400,7 @@ namespace AudioPlayer.ViewModel
 
         private void MediaEnded(object sender, EventArgs e)
         {
-            if(!isRepeat)
+            if(!IsRepeat)
             { 
                 Next.Execute(null);
             }
@@ -414,20 +410,5 @@ namespace AudioPlayer.ViewModel
             }
         }
 
-        private void Timer_Tick(object sender, EventArgs e)
-        {
-            try
-            {
-                SliderValue = mediaPlayer.Position.TotalSeconds;
-                CurrentTimeText = String.Format("{0:mm\\:ss}", TimeSpan.FromSeconds(SliderValue));
-                TotalDuration = mediaPlayer.NaturalDuration.TimeSpan.TotalSeconds;
-                DurationText = String.Format("{0:mm\\:ss}", TimeSpan.FromSeconds(mediaPlayer.NaturalDuration.TimeSpan.TotalSeconds));
-
-            }
-            catch(Exception exc)
-            {
-
-            }
-        }
     }
 }
